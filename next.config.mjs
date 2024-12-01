@@ -13,6 +13,12 @@ export default (phase, { defaultConfig }) => {
     compiler: {
       reactRemoveProperties: true,
     },
+    webpack(config) {
+      config.plugins = config.plugins.filter(
+        (plugin) => plugin.constructor.name !== "ReactRefreshWebpackPlugin"
+      );
+      return config;
+    },
   };
   return nextConfig;
 };
