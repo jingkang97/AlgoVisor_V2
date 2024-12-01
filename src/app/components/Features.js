@@ -1,89 +1,153 @@
 "use client";
 import React, { useRef } from "react";
+import "./features.css";
 
 export default function Features() {
   const cardsRef = useRef(null);
 
   const handleMouseMove = (e) => {
+    // Loop over each card and set the CSS properties
     for (const card of cardsRef.current.children) {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
+      // Apply custom properties for each card individually
       card.style.setProperty("--mouse-x", `${x}px`);
       card.style.setProperty("--mouse-y", `${y}px`);
     }
   };
 
   return (
-    <div className="flex justify-center items-center mt-[-50px] mb-12 overflow-hidden">
-      <div
-        className="flex flex-wrap gap-2 max-w-[916px] w-[calc(100%-20px)]"
-        ref={cardsRef}
-        onMouseMove={handleMouseMove}
-      >
-        {[
-          {
-            title: "Learn with Visualization",
-            description:
-              "Understand how the algorithm works with animation and visualization",
-          },
-          {
-            title: "Practice makes perfect",
-            description:
-              "Explore the curated set of questions available here to refine your skills.",
-          },
-          {
-            title: "A Personal Touch",
-            description:
-              "Feeling Lost? Contact our expert here for any questions",
-          },
-          {
-            title: "Progressive Overload",
-            description: "Sign in to track your progress and achievements",
-          },
-          {
-            title: "x2 x0.5 Speed",
-            description: "Watch the set of curated lectures at your own pace",
-          },
-          {
-            title: "Open for work",
-            description: "Leverage on the resources for your future career.",
-          },
-        ].map((card, idx) => (
-          <div
-            key={idx}
-            className="relative flex flex-col w-[300px] h-[260px] bg-white/10 rounded-lg cursor-pointer"
-            style={{
-              "--mouse-x": "0px",
-              "--mouse-y": "0px",
-            }}
-          >
-            <div
-              className="absolute inset-0 rounded-lg bg-gradient-to-r from-white/5 to-transparent opacity-0 transition-opacity duration-500 z-10"
-              style={{
-                background: `radial-gradient(
-                  800px circle at var(--mouse-x) var(--mouse-y),
-                  rgba(255, 255, 255, 0.06),
-                  transparent 40%
-                )`,
-              }}
-            ></div>
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-white/40 to-transparent opacity-0 z-0"></div>
-            <div className="flex flex-col flex-grow bg-[#171717] p-4 rounded-lg z-20">
-              <div className="flex justify-center items-center h-[140px]">
-                <i className="text-[6em] text-white/25 fa-duotone fa-unicorn"></i>
-              </div>
-              <div className="flex flex-col justify-start items-start px-5 flex-grow gap-2">
-                <h3 className="text-lg text-white font-semibold">
-                  {card.title}
-                </h3>
-                <h4 className="text-sm text-white/50">{card.description}</h4>
+    <div id="body">
+      <div id="cards" ref={cardsRef} onMouseMove={handleMouseMove}>
+        <div className="card">
+          <div className="card-content">
+            <div className="card-image">
+              <i className="fa-duotone fa-apartment"></i>
+            </div>
+            <div className="card-info-wrapper">
+              <div className="card-info">
+                <i className="fa-duotone fa-apartment"></i>
+                <div className="card-info-title">
+                  <h3>Learn with Visualization</h3>
+                  <h4>
+                    Understand how the algorithm works with animation and
+                    visualization
+                  </h4>
+                </div>
               </div>
             </div>
           </div>
-        ))}
+        </div>
+        <div className="card">
+          <div className="card-content">
+            <div className="card-image">
+              <i className="fa-duotone fa-unicorn"></i>
+            </div>
+            <div className="card-info-wrapper">
+              <div className="card-info">
+                <i className="fa-duotone fa-unicorn"></i>
+                <div className="card-info-title">
+                  <h3>Practice makes perfect</h3>
+                  <h4>
+                    Explore the curated set of questions available here to
+                    refine your skills.
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-content">
+            <div className="card-image">
+              <i className="fa-duotone fa-unicorn"></i>
+            </div>
+            <div className="card-info-wrapper">
+              <div className="card-info">
+                <i className="fa-duotone fa-unicorn"></i>
+                <div className="card-info-title">
+                  <h3>A Personal Touch</h3>
+                  <h4>
+                    Feeling Lost? Contact our expert here for any questions
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-content">
+            <div className="card-image">
+              <i className="fa-duotone fa-unicorn"></i>
+            </div>
+            <div className="card-info-wrapper">
+              <div className="card-info">
+                <i className="fa-duotone fa-unicorn"></i>
+                <div className="card-info-title">
+                  <h3>Progressive Overload</h3>
+                  <h4>Sign in to track your progress and achievements</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-content">
+            <div className="card-image">
+              <i className="fa-duotone fa-unicorn"></i>
+            </div>
+            <div className="card-info-wrapper">
+              <div className="card-info">
+                <i className="fa-duotone fa-unicorn"></i>
+                <div className="card-info-title">
+                  <h3>x2 x0.5 Speed</h3>
+                  <h4>Watch the set of curated lectures at your own pace</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-content">
+            <div className="card-image">
+              <i className="fa-duotone fa-unicorn"></i>
+            </div>
+            <div className="card-info-wrapper">
+              <div className="card-info">
+                <i className="fa-duotone fa-unicorn"></i>
+                <div className="card-info-title">
+                  <h3>Open for work</h3>
+                  <h4>Leverage on the resources for your future career.</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      {/* 
+      <a
+        id="source-link"
+        className="link"
+        href="https://linear.app/features"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fa-solid fa-link"></i>
+        <span className="roboto-mono">Source</span>
+      </a>
+
+      <a
+        id="youtube-link"
+        className="link"
+        href="https://youtu.be/htGfnF1zN4g"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fa-brands fa-youtube"></i>
+        <span>5 min Tutorial</span>
+      </a> */}
     </div>
   );
 }
