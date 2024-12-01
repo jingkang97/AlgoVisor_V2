@@ -10,6 +10,9 @@ export default (phase, { defaultConfig }) => {
     devIndicators: {
       buildActivity: false, // Disable build activity overlay
     },
+    compiler: {
+      reactRemoveProperties: true,
+    },
   };
   return nextConfig;
 };
