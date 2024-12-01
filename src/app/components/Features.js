@@ -10,6 +10,11 @@ import {
   BriefcaseIcon,
 } from "@heroicons/react/24/outline";
 import "./features.css";
+import {
+  GlowingStarsBackgroundCard,
+  GlowingStarsDescription,
+  GlowingStarsTitle,
+} from "./ui/GlowingStars";
 
 export default function Features() {
   const cardsRef = useRef(null);
@@ -49,6 +54,7 @@ export default function Features() {
       description:
         "Understand how the algorithm works with animation and visualization",
       icon: EyeIcon,
+      display: <GlowingStarsBackgroundCard />,
     },
     {
       title: "Practice makes perfect",
@@ -101,7 +107,9 @@ export default function Features() {
             <div className="card-content">
               <div className="card-image">
                 {/* <feature.icon className="w-6 h-6 text-gray-200" /> */}
-                Image
+                {/* Image */}
+                {/* <GlowingStarsBackgroundCard /> */}
+                {feature.display}
               </div>
               <div className="card-info-wrapper flex justify-center items-center">
                 <div className="card-info flex items-center justify-center gap-4">

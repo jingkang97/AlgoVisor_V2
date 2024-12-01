@@ -23,7 +23,7 @@ export default function TileGrid() {
         }}
       ></motion.div>
       <motion.div
-        className="absolute bottom-[173px] left-0 w-[100vw] h-[3px]"
+        className="absolute bottom-[179px] left-0 w-[100vw] h-[3px]"
         initial={{
           background:
             "linear-gradient(to right, transparent 0%, white 10%, transparent 20%)",
