@@ -1,19 +1,25 @@
 "use client";
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
+import {
+  EyeIcon,
+  CheckCircleIcon,
+  UserIcon,
+  ChartBarIcon,
+  ClockIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/24/outline";
 import "./features.css";
 
 export default function Features() {
   const cardsRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    // Loop over each card and set the CSS properties
     for (const card of cardsRef.current.children) {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Apply custom properties for each card individually
       card.style.setProperty("--mouse-x", `${x}px`);
       card.style.setProperty("--mouse-y", `${y}px`);
     }
@@ -26,8 +32,8 @@ export default function Features() {
       opacity: 1,
       y: 0,
       transition: {
-        staggerChildren: 0.2, // Stagger the children (cards)
-        delayChildren: 0.3, // Delay before animation starts
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
       },
     },
   };
@@ -36,6 +42,41 @@ export default function Features() {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
+
+  const features = [
+    {
+      title: "Learn with Visualization",
+      description:
+        "Understand how the algorithm works with animation and visualization",
+      icon: EyeIcon,
+    },
+    {
+      title: "Practice makes perfect",
+      description:
+        "Explore the curated set of questions available here to refine your skills.",
+      icon: CheckCircleIcon,
+    },
+    {
+      title: "A Personal Touch",
+      description: "Feeling Lost? Contact our expert here for any questions",
+      icon: UserIcon,
+    },
+    {
+      title: "Progressive Overload",
+      description: "Sign in to track your progress and achievements",
+      icon: ChartBarIcon,
+    },
+    {
+      title: "x2 x0.5 Speed",
+      description: "Watch the set of curated lectures at your own pace",
+      icon: ClockIcon,
+    },
+    {
+      title: "Open for work",
+      description: "Leverage on the resources for your future career.",
+      icon: BriefcaseIcon,
+    },
+  ];
 
   return (
     <motion.div
@@ -46,14 +87,7 @@ export default function Features() {
       onMouseMove={handleMouseMove}
     >
       <div id="cards" ref={cardsRef}>
-        {[
-          "Learn with Visualization",
-          "Practice makes perfect",
-          "A Personal Touch",
-          "Progressive Overload",
-          "x2 x0.5 Speed",
-          "Open for work",
-        ].map((title, index) => (
+        {features.map((feature, index) => (
           <motion.div
             key={index}
             className="card"
@@ -66,33 +100,20 @@ export default function Features() {
           >
             <div className="card-content">
               <div className="card-image">
-                <i
-                  className={`fa-duotone fa-${
-                    index % 2 === 0 ? "apartment" : "unicorn"
-                  } text-gray-200`}
-                />
+                {/* <feature.icon className="w-6 h-6 text-gray-200" /> */}
+                Image
               </div>
               <div className="card-info-wrapper flex justify-center items-center">
                 <div className="card-info flex items-center justify-center gap-4">
-                  <i
-                    className={`fa-duotone fa-${
-                      index % 2 === 0 ? "apartment" : "unicorn"
-                    } text-gray-200`}
-                  />
                   <div className="card-info-title text-center">
-                    <h3 className="text-white font-semibold">{title}</h3>
+                    <h3 className="text-white font-semibold text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <feature.icon className="w-5 h-5 text-white" />
+                        {feature.title}
+                      </div>
+                    </h3>
                     <h4 className="text-sm text-gray-400">
-                      {index === 0
-                        ? "Understand how the algorithm works with animation and visualization"
-                        : index === 1
-                        ? "Explore the curated set of questions available here to refine your skills."
-                        : index === 2
-                        ? "Feeling Lost? Contact our expert here for any questions"
-                        : index === 3
-                        ? "Sign in to track your progress and achievements"
-                        : index === 4
-                        ? "Watch the set of curated lectures at your own pace"
-                        : "Leverage on the resources for your future career."}
+                      {feature.description}
                     </h4>
                   </div>
                 </div>
