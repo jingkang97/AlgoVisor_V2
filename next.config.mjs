@@ -1,4 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+// @ts-check
 
-export default nextConfig;
+export default (phase, { defaultConfig }) => {
+  /**
+   * @type {import('next').NextConfig}
+   */
+  const nextConfig = {
+    /* config options here */
+    reactStrictMode: true,
+    devIndicators: {
+      buildActivity: false, // Disable build activity overlay
+    },
+  };
+  return nextConfig;
+};
