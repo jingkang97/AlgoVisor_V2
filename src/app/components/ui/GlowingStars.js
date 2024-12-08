@@ -3,20 +3,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/app/lib/utils";
+import "../features.css";
 
 export const GlowingStarsBackgroundCard = ({ className, children }) => {
   const [mouseEnter, setMouseEnter] = useState(false);
 
   return (
     <div
-      onMouseEnter={() => {
+      onMouseEnter={(e) => {
+        e.stopPropagation();
         setMouseEnter(true);
       }}
       onMouseLeave={() => {
         setMouseEnter(false);
       }}
       className={cn(
-        "p-4 max-w-md max-h-[20rem] h-full w-full rounded-xl",
+        "p-4 max-w-md max-h-[20rem] h-full w-full rounded-xl glowing-stars-card",
         className
       )}
     >
@@ -49,23 +51,38 @@ export const Illustration = ({ mouseEnter }) => {
   const columns = 18;
 
   const [glowingStars, setGlowingStars] = useState([]);
+  const randomInterval = useRef(null);
 
-  const highlightedStars = useRef([]);
+  // Predefined indices for the "V" and "A" pattern
+  const letterVAIndices = {
+    V: [3, 20, 22, 37, 38, 39, 40, 41, 54, 60],
+    A: [68, 49, 51, 30, 34, 11, 17],
+  };
+
+  // Start random glowing stars
+  useEffect(() => {
+    if (!mouseEnter) {
+      randomInterval.current = setInterval(() => {
+        const randomStars = Array.from({ length: 10 }, () =>
+          Math.floor(Math.random() * stars)
+        );
+        setGlowingStars(randomStars);
+      }, 1000);
+    }
+
+    return () => clearInterval(randomInterval.current); // Cleanup interval on unmount or hover
+  }, [mouseEnter]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      highlightedStars.current = Array.from({ length: 5 }, () =>
-        Math.floor(Math.random() * stars)
-      );
-      setGlowingStars([...highlightedStars.current]);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
+    if (mouseEnter) {
+      // Highlight "VA" stars when hovering
+      setGlowingStars([...letterVAIndices.V, ...letterVAIndices.A]);
+    }
+  }, [mouseEnter]);
 
   return (
     <div
-      className="h-48 p-1 w-full"
+      className="h-48 p-1 w-full glowing-stars-card"
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${columns}, 1fr)`,
@@ -78,14 +95,13 @@ export const Illustration = ({ mouseEnter }) => {
         const staticDelay = starIdx * 0.01;
         return (
           <div
-            key={`matrix-col-${starIdx}}`}
+            key={`matrix-col-${starIdx}`}
             className="relative flex items-center justify-center"
           >
             <Star
-              isGlowing={mouseEnter ? true : isGlowing}
+              isGlowing={isGlowing}
               delay={mouseEnter ? staticDelay : delay}
             />
-            {mouseEnter && <Glow delay={staticDelay} />}
             <AnimatePresence mode="wait">
               {isGlowing && <Glow delay={delay} />}
             </AnimatePresence>
@@ -99,7 +115,6 @@ export const Illustration = ({ mouseEnter }) => {
 const Star = ({ isGlowing, delay }) => {
   return (
     <motion.div
-      key={delay}
       initial={{
         scale: 1,
       }}
@@ -134,7 +149,7 @@ const Glow = ({ delay }) => {
       exit={{
         opacity: 0,
       }}
-      className="absolute  left-1/2 -translate-x-1/2 z-10 h-[4px] w-[4px] rounded-full bg-blue-500 blur-[1px] shadow-2xl shadow-blue-400"
+      className="absolute left-1/2 -translate-x-1/2 z-10 h-[4px] w-[4px] rounded-full bg-blue-500 blur-[1px] shadow-2xl shadow-blue-400"
     />
   );
 };

@@ -15,6 +15,7 @@ import {
   GlowingStarsDescription,
   GlowingStarsTitle,
 } from "./ui/GlowingStars";
+import PersonalTouch from "./ui/PersonalTouch";
 
 export default function Features() {
   const cardsRef = useRef(null);
@@ -54,23 +55,29 @@ export default function Features() {
       description:
         "Understand how the algorithm works with animation and visualization",
       icon: EyeIcon,
-      display: <GlowingStarsBackgroundCard />,
+      display: (
+        // <div className="glowing-stars-card">
+        <GlowingStarsBackgroundCard />
+        // </div>
+      ),
+    },
+
+    {
+      title: "A Personal Touch",
+      description: "Feeling Lost? Contact our expert here for any questions",
+      icon: UserIcon,
+      display: <PersonalTouch />,
+    },
+    {
+      title: "Progressive Overload",
+      description: "Sign in to track your progress and achievements",
+      icon: ChartBarIcon,
     },
     {
       title: "Practice makes perfect",
       description:
         "Explore the curated set of questions available here to refine your skills.",
       icon: CheckCircleIcon,
-    },
-    {
-      title: "A Personal Touch",
-      description: "Feeling Lost? Contact our expert here for any questions",
-      icon: UserIcon,
-    },
-    {
-      title: "Progressive Overload",
-      description: "Sign in to track your progress and achievements",
-      icon: ChartBarIcon,
     },
     {
       title: "x2 x0.5 Speed",
@@ -104,18 +111,16 @@ export default function Features() {
               damping: 20,
             }}
           >
+            <div className="relative overflow-hidden clipped-content">
+              {feature.display}
+            </div>
             <div className="card-content">
-              <div className="card-image">
-                {/* <feature.icon className="w-6 h-6 text-gray-200" /> */}
-                {/* Image */}
-                {/* <GlowingStarsBackgroundCard /> */}
-                {feature.display}
-              </div>
-              <div className="card-info-wrapper flex justify-center items-center">
+              {/* <div className="card-image">{feature.display}</div> */}
+              <div className="card-info-wrapper flex justify-center items-center mt-[120px]">
                 <div className="card-info flex items-center justify-center gap-4">
                   <div className="card-info-title text-center">
                     <h3 className="text-white font-semibold text-center">
-                      <div className="flex items-center justify-center gap-2">
+                      <div className="flex items-center justify-center gap-4">
                         <feature.icon className="w-5 h-5 text-white" />
                         {feature.title}
                       </div>

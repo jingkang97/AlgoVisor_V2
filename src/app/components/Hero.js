@@ -7,6 +7,7 @@ import MainTextTypingEffect from "./MainTextTypingEffect";
 import TileGrid from "./TileGrid";
 import MainText from "./MainText";
 import { Spotlight } from "./ui/Spotlight";
+import { GlowingStarsBackgroundCard } from "./ui/GlowingStars";
 export default function Hero() {
   return (
     <main className="w-full relative">
@@ -68,6 +69,7 @@ export default function Hero() {
           <CustomButton text={"Try a question"} />
         </div>
       </div>
+      {/* <GlowingStarsBackgroundCard /> */}
     </main>
   );
 }

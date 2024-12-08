@@ -6,6 +6,9 @@ export default (phase, { defaultConfig }) => {
    */
   const nextConfig = {
     /* config options here */
+    images: {
+      domains: ["pbs.twimg.com"], // Add the domain here
+    },
     reactStrictMode: true,
     devIndicators: {
       buildActivity: false, // Disable build activity overlay
